@@ -1,0 +1,13 @@
+{% extends 'taskapp/base.html' %}
+
+{% block content %}
+    {% for task in tasks %}
+        <div class="post">
+          　<span style= "color:blue;">{{ task.pk }}</span></a>
+            <div class="date">
+                {{ task.limit_date }}
+            </div>
+            <p>{{ task.title }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
