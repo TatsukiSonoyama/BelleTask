@@ -8,6 +8,11 @@
                 {{ task.limit_date }}
             </div>
             <p>{{ task.title }}</p>
+            {% if task.is_completed %}
+                <p>Completed</p>
+            {% else %}
+                <p>Waiting</p>
+            {% endif %}
         </div>
     {% endfor %}
 {% endblock %}
