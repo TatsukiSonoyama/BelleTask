@@ -7,7 +7,7 @@
             <div class="date">
                 {{ task.limit_date }}
             </div>
-            <p>{{ task.title }}</p>
+            <p><a href="{% url 'task_edit' pk=task.pk %}">{{ task.title }}</p>
             {% if task.is_completed %}
                 <p>Completed</p>
             {% else %}

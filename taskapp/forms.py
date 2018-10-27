@@ -6,4 +6,4 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('title', 'limit_date',)
+        fields = ('title', 'limit_date','is_completed')
