@@ -33,3 +33,7 @@ def task_edit(request, pk):
     else:
         form = TaskForm(instance=task)
     return render(request, 'taskapp/task_edit.html', {'form': form})
+
+def task_uncompleted(request):
+    tasks = Task.objects.filter(is_completed=False).order_by("limit_date")
+    return render(request,"taskapp/task_uncompleted.html",{"tasks":tasks})

@@ -1,7 +1,7 @@
 {% extends 'taskapp/base.html' %}
 
 {% block content %}
-<a href="{% url 'task_uncompleted' %}">未完のみ表示</a>
+<a href="{% url 'task_list' %}">全て表示</a>
     {% for task in tasks %}
         <div class="post">
           　<span style= "color:blue;">{{ task.pk }}</span></a>
