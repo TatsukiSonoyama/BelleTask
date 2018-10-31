@@ -1,14 +1,15 @@
 {% extends 'taskapp/base.html' %}
 
 {% block content %}
-<a href="{% url 'task_uncompleted' %}">未完のみ表示</a>
+{% if user.is_authenticated %}
+<a href="{% url 'taskapp:task_uncompleted' %}">未完のみ表示</a>
     {% for task in tasks %}
         <div class="post">
           　<span style= "color:blue;">{{ task.pk }}</span></a>
             <div class="date">
                 {{ task.limit_date }}
             </div>
-            <p><a href="{% url 'task_edit' pk=task.pk %}">{{ task.title }}</p>
+            <p><a href="{% url 'taskapp:task_edit' pk=task.pk %}">{{ task.title }}</p>
             {% if task.is_completed %}
                 <p>Completed</p>
             {% else %}
@@ -16,4 +17,5 @@
             {% endif %}
         </div>
     {% endfor %}
+{% endif %}
 {% endblock %}

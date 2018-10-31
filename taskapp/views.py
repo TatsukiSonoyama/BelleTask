@@ -2,6 +2,22 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import Task
 from .forms import TaskForm
 from django.utils import timezone
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import (
+    LoginView, LogoutView
+)
+from django.views import generic
+from .forms import LoginForm
+
+class Login(LoginView):
+    """ログインページ"""
+    form_class = LoginForm
+    template_name = 'taskapp/login.html'
+
+
+class Logout(LoginRequiredMixin, LogoutView):
+    """ログアウトページ"""
+    template_name = 'taskapp/task_list.html'
 
 # Create your views here.
 def task_list(request):
