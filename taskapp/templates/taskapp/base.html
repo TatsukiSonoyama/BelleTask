@@ -1,26 +1,55 @@
 {% load static %}
-<html>
+<html lang="ja">
     <head>
         <title>Belle Taskapp</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-        <!-- <link rel="stylesheet" href="{% static 'css/blog.css' %}"> -->
+        <link rel="stylesheet" href="{% static 'css/taskapp.css' %}">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     </head>
-    <body>
-        <div class="page-header">
-            {% if user.is_authenticated %}
-             <a href="{% url 'task_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-            {% endif %}
-            <h1><a href="/taskapp">Belle Taskapp</a></h1>
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-                </div>
+
+<body>
+    <!-- ナビバー -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'taskapp:task_list' %}">ホームページ名</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          {% if user.is_authenticated %}
+          <li>
+            <a class="nav-item nav-link" href="{% url 'taskapp:logout' %}">ログアウト</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="{% url 'taskapp:login' %}">
+            ようこそ、ゲスト！ログインはこちら
+          </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <div class="page-header">
+        {% if user.is_authenticated %}
+          <a href="{% url 'taskapp:task_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+        {% endif %}
+        <h1><a href="/taskapp">Belle Taskapp</a></h1>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
