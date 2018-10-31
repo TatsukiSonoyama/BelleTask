@@ -6,8 +6,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView
 )
-from django.views import generic
 from .forms import LoginForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
 
 class Login(LoginView):
     """ログインページ"""
@@ -53,3 +55,14 @@ def task_edit(request, pk):
 def task_uncompleted(request):
     tasks = Task.objects.filter(is_completed=False).order_by("limit_date")
     return render(request,"taskapp/task_uncompleted.html",{"tasks":tasks})
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('taskapp:task_list')
+    else:
+        form = UserCreationForm()
+    return render(request, 'taskapp/signup.html', {'form': form})
