@@ -31,7 +31,7 @@ def task_new(request):
             task = form.save(commit=False)
             task.author = request.user
             task.save()
-            return redirect('task_list')
+            return redirect('taskapp:task_list')
     else:
         form = TaskForm()
     return render(request, 'taskapp/task_edit.html', {'form': form})
@@ -45,7 +45,7 @@ def task_edit(request, pk):
             task.author = request.user
             task.created_date = timezone.now()
             task.save()
-            return redirect('task_list')
+            return redirect('taskapp:task_list')
     else:
         form = TaskForm(instance=task)
     return render(request, 'taskapp/task_edit.html', {'form': form})
